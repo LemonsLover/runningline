@@ -2,9 +2,12 @@ const root = document.querySelector("#root");
 
 const form = document.querySelector("#form");
 
+const notNumberTypes = ["filledColor", "emptyColor"];
+
 form.addEventListener("input", (e) => {
   const input = e.target;
-  settings[input.id] = +input.value;
+  if (notNumberTypes.includes(input.id)) settings[input.id] = input.value;
+  else settings[input.id] = +input.value;
   updateField();
 });
 
@@ -13,6 +16,8 @@ const settings = {
   empty: 2,
   speed: 300,
   amount: 100,
+  filledColor: "#000000",
+  emptyColor: "#808080",
 };
 
 const inputs = form.querySelectorAll("input");
@@ -62,8 +67,13 @@ const drawCells = () => {
   root.innerHTML = "";
   line.forEach((el) => {
     const div = document.createElement("div");
-    if (el) div.classList.add("cell", "black");
-    else div.classList.add("cell", "white");
+    if (el) {
+      div.classList.add("cell");
+      div.style.backgroundColor = settings.filledColor;
+    } else {
+      div.classList.add("cell");
+      div.style.backgroundColor = settings.emptyColor;
+    }
 
     root.appendChild(div);
   });
