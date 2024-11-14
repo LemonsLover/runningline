@@ -1,5 +1,4 @@
 const root = document.querySelector("#root");
-
 const form = document.querySelector("#form");
 
 const notNumberTypes = ["filledColor", "emptyColor"];
@@ -18,6 +17,9 @@ const settings = {
   amount: 100,
   filledColor: "#000000",
   emptyColor: "#808080",
+  rectWidth: 50,
+  rectHeight: 50,
+  gapSize: 0,
 };
 
 const inputs = form.querySelectorAll("input");
@@ -74,7 +76,9 @@ const drawCells = () => {
       div.classList.add("cell");
       div.style.backgroundColor = settings.emptyColor;
     }
-
+    div.style.width = settings.rectWidth + "px";
+    div.style.height = settings.rectHeight + "px";
+    root.style.gap = settings.gapSize + "px";
     root.appendChild(div);
   });
 };
